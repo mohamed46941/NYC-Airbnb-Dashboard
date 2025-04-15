@@ -17,7 +17,7 @@ numeric_cols = df.select_dtypes(include="number").columns.tolist()
 categorical_cols = df.select_dtypes(include="object").columns.tolist()
 
 # Initialize app
-app = Dash()
+app = Dash(__name__)
 server = app.server
 
 # App layout
@@ -374,6 +374,8 @@ def cat_vs_num(cat, num, func):
     bar.update_yaxes(title=f"{func.capitalize()} {num} 💡", showgrid=True)
 
     return dcc.Graph(figure=box), dcc.Graph(figure=bar)
+if __name__ == "__main__":
+    app.run_server(debug=False, host="0.0.0.0", port=8080)
 
 
 # Run app
